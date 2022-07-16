@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ca43952785.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Codepen Clone</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="brand">
+                <img src="./assets/img/logo.png" width="40px">
+                <div class="user">
+                    <p><span>Untitled</span><input type="text" id="judul"> <i class="fa-solid fa-pen"></i></p>
+                    <p>Captain Anonymous</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-cloud"></i>Save</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
+                    </li>
+                    <li>
+                        <a href="#" class="layouts">
+                            <img src="./assets/img/layout.png">
+                            <div class="layout-view">
+                                <div class="view">Change View</div>
+                                <div class="icon-view">
+                                    <img src="./assets/img/layout2.png">
+                                    <img src="./assets/img/layout1.png" class="active">
+                                    <img src="./assets/img/layout3.png">
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li><a href="#" class="sign">Sign Up</a></li>
+                    <li class="login"><a href="#">Login</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="coder">
+            <div class="code-editor">
+                <div class="code-type"><span>/</span>HTML</div>
+                <div class="code html" id="html"></div>
+            </div>
+            <div class="code-editor">
+                <div class="code-type"><span>*</span>CSS</div>
+                <div class="code css" id="css"></div>
+            </div>
+            <div class="code-editor">
+                <div class="code-type"><span>()</span>JS</div>
+                <div class="code js" id="js"></div>
+            </div>
+        </div>
+        <div class="output">
+            <iframe src="" class="virtual" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <!-- ace.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.7.1/ace.js"
+        integrity="sha512-FKkEO4RZEQjFmU1hoUYdx6HJLdpHpNzgWspgnQCxx7OOkDVz4kiGJxR97yWc5bzjwcCpJC/CRCiQzuoGYAChhQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="./assets/js/app.js"></script>
+</body>
+
+</html>

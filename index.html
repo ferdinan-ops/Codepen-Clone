@@ -12,47 +12,41 @@
 
 <body>
 
-    <div class="container">
-        <header>
-            <div class="brand">
-                <img src="./assets/img/logo.png" width="40px">
-                <div class="user">
-                    <p><span>Untitled</span><input type="text" id="judul"> <i class="fa-solid fa-pen"></i></p>
-                    <p>Captain Anonymous</p>
-                </div>
+    <header>
+        <div class="brand">
+            <img src="./assets/img/logo.png" width="40px">
+            <div class="user">
+                <p><span>Untitled</span><input type="text" id="judul"> <i class="fa-solid fa-pen"></i></p>
+                <p>Captain Anonymous</p>
             </div>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="#"><i class="fa-solid fa-cloud"></i>Save</a>
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
-                    </li>
-                    <li>
-                        <a href="#" class="layouts">
-                            <img src="./assets/img/layout.png">
-                            <div class="layout-view">
-                                <div class="view">Change View</div>
-                                <div class="icon-view">
-                                    <img src="./assets/img/layout2.png">
-                                    <img src="./assets/img/layout1.png" class="active">
-                                    <img src="./assets/img/layout3.png">
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li><a href="#" class="sign">Sign Up</a></li>
-                    <li class="login"><a href="#">Login</a></li>
+        </div>
+
+        <ul class="nav">
+            <li><a href="#"><i class="fa-solid fa-cloud"></i>Save</a></li>
+            <li><a href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
+            <li class="list-layouts">
+                <a href="#" class="layouts"><img src="./assets/img/layout1.png" width="20px"></a>
+                <ul class="layout-view">
+                    <p>Change View</p>
+                    <div class="view">
+                        <li><img src="./assets/img/layout2.png"></li>
+                        <li class="active"><img src="./assets/img/layout1.png"></li>
+                        <li><img src="./assets/img/layout3.png"></li>
+                    </div>
                 </ul>
-            </nav>
-        </header>
-        <div class="coder">
+            </li>
+            <li><a href="#" class="sign-up">Sign Up</a></li>
+            <li><a href="#">Login</a></li>
+        </ul>
+
+    </header>
+    <div class="container ">
+        <div class="coder ">
             <div class="code-editor">
                 <div class="code-type"><span>/</span>HTML</div>
                 <div class="code html" id="html"></div>
             </div>
-            <div class="code-editor">
+            <div class="code-editor ">
                 <div class="code-type"><span>*</span>CSS</div>
                 <div class="code css" id="css"></div>
             </div>

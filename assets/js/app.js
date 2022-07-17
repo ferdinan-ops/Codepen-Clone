@@ -1,20 +1,29 @@
 window.onload = function () {
+    function run() {
+        const output = document.querySelector(".output iframe.virtual");
+        output.contentWindow.document.open();
+        output.contentWindow.document.write("<style>" + cssEditor.getValue() + "</style>" + htmlEditor.getValue() + "<script>" + jsEditor.getValue() + "</script>");
+        output.contentWindow.document.close();
+
+        localStorage.setItem("codepen-clone-storage-html", htmlEditor.getValue());
+        localStorage.setItem("codepen-clone-storage-css", cssEditor.getValue());
+        localStorage.setItem("codepen-clone-storage-js", jsEditor.getValue());
+    }
     let jsEditor = ace.edit("js");
     jsEditor.session.setMode("ace/mode/javascript");
     jsEditor.setTheme("ace/theme/nord_dark");
     jsEditor.session.setUseWrapMode(true);
     jsEditor.setHighlightActiveLine(false);
+    jsEditor.resize();
     if (localStorage.getItem("codepen-clone-storage-js") == null) {
         jsEditor.session.setValue(`// Javascript Goes Here`);
     } else {
         jsEditor.session.setValue(localStorage.getItem("codepen-clone-storage-js"))
     }
-
     jsEditor.addEventListener("change", () => {
         run();
         console.log(jsEditor.session.getValue());
     });
-
     let cssEditor = ace.edit("css");
     cssEditor.session.setMode("ace/mode/css");
     cssEditor.setTheme("ace/theme/nord_dark");
@@ -29,7 +38,6 @@ window.onload = function () {
         run();
         console.log(cssEditor.session.getValue());
     });
-
     let htmlEditor = ace.edit("html");
     htmlEditor.session.setMode("ace/mode/html");
     htmlEditor.setTheme("ace/theme/nord_dark");
@@ -56,35 +64,7 @@ window.onload = function () {
         htmlEditor.session.setValue(localStorage.getItem("codepen-clone-storage-html"));
     }
 
-
-
-    function run() {
-        const output = document.querySelector(".output iframe.virtual");
-        output.contentWindow.document.open();
-        output.contentWindow.document.write("<style>" + cssEditor.getValue() + "</style>" + htmlEditor.getValue() + "<script>" + jsEditor.getValue() + "</script>");
-        output.contentWindow.document.close();
-
-        localStorage.setItem("codepen-clone-storage-html", htmlEditor.getValue());
-        localStorage.setItem("codepen-clone-storage-css", cssEditor.getValue());
-        localStorage.setItem("codepen-clone-storage-js", jsEditor.getValue());
-    }
-
-    const layoutBtn = document.querySelector(".layouts");
-    const layoutView = document.querySelector(".layout-view");
-    layoutBtn.addEventListener("click", () => {
-        layoutView.classList.toggle("click-layout");
-    });
-
-    const jenisLayout = document.querySelectorAll(".icon-view img");
-    for (let i = 0; i < jenisLayout.length; i++) {
-        jenisLayout[i].classList.remove("active");
-        jenisLayout[i].addEventListener("click", () => {
-            if (!jenisLayout[i].classList.contains("active")) {
-                jenisLayout[i].classList.add("active");
-            }
-        })
-    }
-
+    // Judul Code Editor
     const judulCode = document.querySelector(".user p:first-child span");
     const inputJudulCode = document.querySelector(".user p:first-child input");
     const editJudulCode = document.querySelector(".user p:first-child i");
@@ -117,5 +97,39 @@ window.onload = function () {
             }
         });
     }
+
+    // btn change view
+    const layoutsBtn = document.querySelector(".layouts");
+    const layout = document.querySelector(".layout-view");
+    layoutsBtn.addEventListener("click", () => {
+        layout.classList.toggle("active");
+    });
+
+    const views = document.querySelectorAll(".view li img");
+    views[0].addEventListener("click", () => {
+        views[0].parentElement.classList.add("active");
+        views[1].parentElement.classList.remove("active");
+        views[2].parentElement.classList.remove("active");
+
+    });
+
+    views[1].addEventListener("click", () => {
+        views[1].parentElement.classList.add("active");
+        views[0].parentElement.classList.remove("active");
+        views[2].parentElement.classList.remove("active");
+    });
+
+    views[2].addEventListener("click", () => {
+        views[2].parentElement.classList.add("active");
+        views[0].parentElement.classList.remove("active");
+        views[1].parentElement.classList.remove("active");
+    });
+
+
+    for (var i = 0; i < document.getElementsByClassName("code").length; i++)
+        document.getElementsByClassName("code")[i].style.height = document.querySelector(".code-editor").clientHeight - 80 + "px";
+    htmlEditor.resize();
+    cssEditor.resize();
+    jsEditor.resize();
 
 }

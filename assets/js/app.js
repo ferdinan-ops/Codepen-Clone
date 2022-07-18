@@ -101,6 +101,9 @@ window.onload = function () {
     // btn change view
     const layoutsBtn = document.querySelector(".layouts");
     const layout = document.querySelector(".layout-view");
+    const coder = document.querySelector(".coder");
+    const container = document.querySelector(".container");
+    const codeEditorCSS = document.querySelector(".coder .code-editor:nth-child(2)");
     layoutsBtn.addEventListener("click", () => {
         layout.classList.toggle("active");
     });
@@ -110,26 +113,59 @@ window.onload = function () {
         views[0].parentElement.classList.add("active");
         views[1].parentElement.classList.remove("active");
         views[2].parentElement.classList.remove("active");
-
+        coder.classList.add("view1");
+        container.classList.add("view1");
+        codeEditorCSS.classList.add("view1");
+        coder.classList.remove("view3");
+        container.classList.remove("view3");
+        codeEditorCSS.classList.remove("view3");
+        setViewCode("view1");
     });
 
     views[1].addEventListener("click", () => {
         views[1].parentElement.classList.add("active");
         views[0].parentElement.classList.remove("active");
         views[2].parentElement.classList.remove("active");
+        coder.classList.remove("view1", "view3");
+        container.classList.remove("view1", "view3");
+        codeEditorCSS.classList.remove("view1", "view3");
+        setViewCode("normal");
     });
 
     views[2].addEventListener("click", () => {
         views[2].parentElement.classList.add("active");
         views[0].parentElement.classList.remove("active");
         views[1].parentElement.classList.remove("active");
+        coder.classList.add("view3");
+        container.classList.add("view3");
+        codeEditorCSS.classList.add("view3");
+        setViewCode("view3");
     });
 
+    function setViewCode(category) {
+        if (category == "normal") {
+            for (var i = 0; i < document.getElementsByClassName("code").length; i++) {
+                document.getElementsByClassName("code")[i].style.maxHeight = "unset";
+                document.getElementsByClassName("code")[i].style.height = document.querySelector(".code-editor").clientHeight - 80 + "px";
+            }
+            resizeEditor();
+        } else {
+            for (var i = 0; i < document.getElementsByClassName("code").length; i++) {
+                document.getElementsByClassName("code")[i].style.height = document.querySelector(".code-editor").clientHeight - 40 + "px";
+                document.getElementsByClassName("code")[i].style.maxHeight = "170px";
+            }
+            resizeEditor();
+        }
+    }
+
+    function resizeEditor() {
+        htmlEditor.resize();
+        cssEditor.resize();
+        jsEditor.resize();
+    }
 
     for (var i = 0; i < document.getElementsByClassName("code").length; i++)
         document.getElementsByClassName("code")[i].style.height = document.querySelector(".code-editor").clientHeight - 80 + "px";
-    htmlEditor.resize();
-    cssEditor.resize();
-    jsEditor.resize();
+    resizeEditor();
 
 }

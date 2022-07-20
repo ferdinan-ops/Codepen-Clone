@@ -44,6 +44,12 @@ header {
 
 .user p input {
     display: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
 }
 
 .user p:last-child {

@@ -14,15 +14,13 @@ window.onload = function () {
     jsEditor.setTheme("ace/theme/nord_dark");
     jsEditor.session.setUseWrapMode(true);
     jsEditor.setHighlightActiveLine(false);
-    jsEditor.resize();
     if (localStorage.getItem("codepen-clone-storage-js") == null) {
         jsEditor.session.setValue(`// Javascript Goes Here`);
     } else {
-        jsEditor.session.setValue(localStorage.getItem("codepen-clone-storage-js"))
+        jsEditor.session.setValue(localStorage.getItem("codepen-clone-storage-js"));
     }
     jsEditor.addEventListener("change", () => {
         run();
-        console.log(jsEditor.session.getValue());
     });
     let cssEditor = ace.edit("css");
     cssEditor.session.setMode("ace/mode/css");
@@ -32,11 +30,12 @@ window.onload = function () {
     if (localStorage.getItem("codepen-clone-storage-css") == null) {
         cssEditor.session.setValue(`/* CSS Goes Here */`);
     } else {
-        cssEditor.session.setValue(localStorage.getItem("codepen-clone-storage-css"))
+        cssEditor.session.setValue(
+            localStorage.getItem("codepen-clone-storage-css")
+        );
     }
     cssEditor.addEventListener("change", () => {
         run();
-        console.log(cssEditor.session.getValue());
     });
     let htmlEditor = ace.edit("html");
     htmlEditor.session.setMode("ace/mode/html");
@@ -45,7 +44,6 @@ window.onload = function () {
     htmlEditor.setHighlightActiveLine(false);
     htmlEditor.addEventListener("change", () => {
         run();
-        console.log(htmlEditor.session.getValue());
     });
     if (localStorage.getItem("codepen-clone-storage-html") == null) {
         htmlEditor.session.setValue(`<!DOCTYPE html>
@@ -61,7 +59,9 @@ window.onload = function () {
     </body>
 </html>`);
     } else {
-        htmlEditor.session.setValue(localStorage.getItem("codepen-clone-storage-html"));
+        htmlEditor.session.setValue(
+            localStorage.getItem("codepen-clone-storage-html")
+        );
     }
 
     // Judul Code Editor
@@ -85,7 +85,7 @@ window.onload = function () {
 
     function setJudul() {
         const inputJudulCode = document.querySelector(".user p:first-child input");
-        inputJudulCode.addEventListener("keyup", e => {
+        inputJudulCode.addEventListener("keyup", (e) => {
             let judul = inputJudulCode.value;
             if (e.key == "Enter") {
                 localStorage.setItem("codepen-clone-storage-judul", judul);
@@ -101,46 +101,47 @@ window.onload = function () {
     // btn change view
     const layoutsBtn = document.querySelector(".layouts");
     const layout = document.querySelector(".layout-view");
-    const coder = document.querySelector(".coder");
-    const container = document.querySelector(".container");
-    const codeEditorCSS = document.querySelector(".coder .code-editor:nth-child(2)");
     layoutsBtn.addEventListener("click", () => {
         layout.classList.toggle("active");
     });
 
+    const coder = document.querySelector(".coder");
+    const container = document.querySelector(".container");
+    const codeEditorCSS = document.querySelector(".coder .code-editor:nth-child(2)");
     const views = document.querySelectorAll(".view li img");
-    views[0].addEventListener("click", () => {
-        views[0].parentElement.classList.add("active");
-        views[1].parentElement.classList.remove("active");
-        views[2].parentElement.classList.remove("active");
-        coder.classList.add("view1");
-        container.classList.add("view1");
-        codeEditorCSS.classList.add("view1");
-        coder.classList.remove("view3");
-        container.classList.remove("view3");
-        codeEditorCSS.classList.remove("view3");
-        setViewCode("view1");
+    views.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            document.querySelector(".view li.active").classList.remove("active");
+            btn.parentElement.classList.add("active");
+            const view1 = document.querySelector(".view li.active:first-child");
+            const view2 = document.querySelector(".view li.active:nth-child(2)");
+            const view3 = document.querySelector(".view li.active:last-child");
+            if (view1) {
+                setViews("view1", "view3");
+            } else if (view2) {
+                setViews("normal");
+            } else {
+                setViews("view3", "view1");
+            }
+        });
     });
 
-    views[1].addEventListener("click", () => {
-        views[1].parentElement.classList.add("active");
-        views[0].parentElement.classList.remove("active");
-        views[2].parentElement.classList.remove("active");
-        coder.classList.remove("view1", "view3");
-        container.classList.remove("view1", "view3");
-        codeEditorCSS.classList.remove("view1", "view3");
-        setViewCode("normal");
-    });
-
-    views[2].addEventListener("click", () => {
-        views[2].parentElement.classList.add("active");
-        views[0].parentElement.classList.remove("active");
-        views[1].parentElement.classList.remove("active");
-        coder.classList.add("view3");
-        container.classList.add("view3");
-        codeEditorCSS.classList.add("view3");
-        setViewCode("view3");
-    });
+    function setViews(views, hapusview) {
+        if (views == "normal") {
+            coder.classList.remove("view1", "view3");
+            container.classList.remove("view1", "view3");
+            codeEditorCSS.classList.remove("view1", "view3");
+            setViewCode("normal");
+        } else {
+            coder.classList.add(views);
+            container.classList.add(views);
+            codeEditorCSS.classList.add(views);
+            coder.classList.remove(hapusview);
+            container.classList.remove(hapusview);
+            codeEditorCSS.classList.remove(hapusview);
+            setViewCode(views);
+        }
+    }
 
     function setViewCode(category) {
         if (category == "normal") {
@@ -164,8 +165,5 @@ window.onload = function () {
         jsEditor.resize();
     }
 
-    for (var i = 0; i < document.getElementsByClassName("code").length; i++)
-        document.getElementsByClassName("code")[i].style.height = document.querySelector(".code-editor").clientHeight - 80 + "px";
-    resizeEditor();
-
-}
+    setViewCode("normal");
+};

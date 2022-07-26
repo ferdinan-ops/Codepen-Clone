@@ -297,3 +297,36 @@ header {
         height: 80%;
     }
 }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .nav li a {
+        display: none;
+    }
+
+    .sign-up {
+        display: block !important;
+    }
+
+    .layouts {
+        display: none !important;
+    }
+
+    .coder {
+        grid-template-columns: repeat(1, 1fr);
+        min-height: 600px;
+    }
+
+    .code-editor {
+        margin: 10px 20px;
+    }
+
+    .coder .code-editor:nth-child(2) {
+        margin: 0 20px;
+    }
+
+    .code {
+        height: 80%;
+    }
+
+}
